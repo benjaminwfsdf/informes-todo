@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar Computadora</title>
+  <script>
+    const clave = prompt("🔐 Ingresa la contraseña para acceder:");
+    if (clave !== "computador@") {
+      alert("❌ Contraseña incorrecta.");
+      window.location.href = "https://www.elsenordelosescaner.cl/";
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .barra-superior {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 3px solid #b30000;
+    }
+
+    .contenedor {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 30px 40px;
+      background: #fff;
+      border: 2px solid #b30000;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    h1 {
+      background-color: #b30000;
+      color: white;
+      padding: 14px;
+      text-align: center;
+      border-radius: 6px;
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-transform: uppercase;
+      box-sizing: border-box;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 14px;
+      background-color: #b30000;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #900000;
+    }
+
+    .resultado {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-left: 5px solid #b30000;
+      border-radius: 6px;
+      font-size: 15px;
+      color: #222;
+    }
+
+    .resultado strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .boton-volver {
+      position: absolute;
+      right: -180px;
+      top: 30px;
+      background-color: #222;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      border: 2px solid #b30000;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .boton-volver:hover {
+      background-color: #b30000;
+    }
+
+    .footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 12px;
+      color: #000;
+      padding: 12px;
+      font-weight: bold;
+      border-top: 1px solid #ccc;
+    }
+
+    @media (max-width: 800px) {
+      .boton-volver {
+        position: static;
+        display: block;
+        margin-top: 30px;
+        text-align: center;
+        width: 100%;
+      }
+
+      .contenedor {
+        padding: 20px;
+        margin: 30px 16px;
+      }
+      .logo-contenedor {
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: -10px;
+}
+
+
+
+    }
+  </style>
+</head>
+<body>
+
+  <div class="barra-superior">WWW.ELSEÑORDELOSESCANER.CL</div>
+
+
+
+  <div class="contenedor">
+    <a href="index.html" class="boton-volver">← Volver al Menú Principal</a>
+
+    <h1>Buscar Computadora</h1>
+
+    <label for="tipo">Buscar por:</label>
+    <select id="tipo">
+      <option value="patente">Patente</option>
+      <option value="telefono">Teléfono del Dueño</option>
+    </select>
+
+    <label for="valor">Ingresa el dato:</label>
+    <input type="text" id="valor" placeholder="Ej: ABCD12 o +56912345678" maxlength="20">
+
+    <button onclick="buscar()">Buscar</button>
+
+    <div id="resultado" class="resultado" style="display:none;"></div>
+  </div>
+
+  <div class="footer">
+    © 2025 Benjamin González. Todos los derechos reservados.
+  </div>
+
+  <script>
+    async function buscar() {
+      const tipo = document.getElementById("tipo").value;
+      const input = document.getElementById("valor");
+      const valor = input.value.trim().toUpperCase();
+      const contenedor = document.getElementById("resultado");
+
+      if (!valor) {
+        alert("⚠️ Ingresa un dato válido para buscar.");
+        return;
+      }
+
+      try {
+        const respuesta = await fetch("https://script.google.com/macros/s/AKfycbzl5Q44Y59ptkCafKRqXNKZ78-uvDaNXEONNCJjSRX6EdbE4yo2mgSbzFXq4ka1cM6-WQ/exec");
+        const datos = await respuesta.json();
+
+        const campo = tipo === "patente" ? "Patente" : "Teléfono";
+
+        const resultado = datos.find(item => {
+          const datoOriginal = (item[campo] || "").toString().toUpperCase().replace(/\D/g, '');
+          const valorNormalizado = valor.replace(/\D/g, '');
+          return datoOriginal === valorNormalizado;
+        });
+
+        contenedor.style.display = "block";
+
+        if (resultado) {
+          contenedor.innerHTML = `
+            <strong>🔧 Patente:</strong> ${resultado["Patente"] || "-"}
+            <strong>📞 Teléfono:</strong> ${resultado["Teléfono"] || "-"}
+            <strong>💻 Tipo de Computadora:</strong> ${resultado["Tipo de Computadora"] || "-"}
+            <strong>🛠️ Trabajo Realizado:</strong> ${resultado["Descripción Trabajo"] || "-"}
+            <strong>⚠️ Códigos de Avería:</strong> ${resultado["Códigos de avería"] || "-"}
+          `;
+        } else {
+          contenedor.innerHTML = `<strong style="color: red;">❌ No se encontró ningún resultado con ese dato.</strong>`;
+        }
+
+      } catch (error) {
+        alert("❌ Error al conectarse a la base de datos.");
+        console.error(error);
+      }
+    }
+  </script>
+
+</body>
+</html>

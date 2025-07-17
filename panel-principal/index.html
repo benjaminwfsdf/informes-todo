@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Principal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .barra-superior {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      font-size: 22px;
+      font-weight: bold;
+      border-bottom: 4px solid #b30000;
+      letter-spacing: 1px;
+    }
+
+    .contenedor {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      border: 3px solid #b30000;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #b30000;
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .opciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .opcion {
+      flex: 1 1 260px;
+      padding: 30px;
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      border: 2px solid #b30000;
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+
+    .opcion:hover {
+      background-color: #b30000;
+      color: white;
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 10px;
+      color: #000;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="barra-superior">WWW.ELSEÑORDELOSESCANER.CL</div>
+
+  <div class="contenedor">
+    <h1>Panel Principal</h1>
+
+    <div class="opciones">
+      <a href="../informacion_vehiculos/index.html" class="opcion">🚗 Gestión de Vehículos</a>
+      <a href="../computadores/index.html" class="opcion">💻 Diagnóstico Computadoras</a>
+      <a href="../proyecto/index.html" class="opcion">📄 Informes de Diagnóstico</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2025 Benjamin González. Todos los derechos reservados.
+  </div>
+
+</body>
+</html>
