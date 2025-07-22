@@ -65,6 +65,14 @@
       margin-top: 40px;
       color: #aaa;
     }
+
+    #totalPendientes {
+      text-align: center;
+      color: white;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
     .footer {
       margin-top: 40px;
       text-align: center;
@@ -79,6 +87,7 @@
 <body>
   <div class="barra-superior">WWW.ELSEÑORDELOSESCANER.CL</div>
   <h1>🔧 Turnos en Espera</h1>
+  <h3 id="totalPendientes">Autos en espera: 0</h3>
 
   <div id="actual"></div>
   <h2>🔜 Próximos</h2>
@@ -101,12 +110,15 @@
       const lista = await obtenerClientes();
       const actual = document.getElementById("actual");
       const siguientes = document.getElementById("siguientes");
+      const totalPendientes = document.getElementById("totalPendientes");
 
       actual.innerHTML = "";
       siguientes.innerHTML = "";
+      totalPendientes.textContent = "";
 
       if (lista.length === 0) {
         actual.innerHTML = `<div class="vacio">No hay clientes en espera 🚫</div>`;
+        totalPendientes.textContent = "Autos en espera: 0";
         return;
       }
 
@@ -119,6 +131,9 @@
         <div class="modelo">Modelo: ${cliente["Modelo"] || "-"}</div>
       `;
       actual.appendChild(bloqueActual);
+
+      // Mostrar total restantes (excluyendo el actual)
+      totalPendientes.textContent = `Autos en espera: ${lista.length - 1}`;
 
       // Próximos 2
       lista.slice(1, 3).forEach(c => {
@@ -135,7 +150,8 @@
     setInterval(actualizarVista, 3000);
     actualizarVista();
   </script>
-   <footer class="footer">
+
+  <footer class="footer">
     © 2025 <strong>Benjamin González</strong>. Todos los derechos reservados.
   </footer>
 </body>
