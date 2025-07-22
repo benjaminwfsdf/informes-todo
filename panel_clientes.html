@@ -82,11 +82,29 @@
       color: #ffffff;
       border-top: 1px solid #ccc;
     }
+
+    .btn-fullscreen {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      padding: 10px 14px;
+      font-size: 18px;
+      background-color: black;
+      color: white;
+      border: 2px solid red;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
   <div class="barra-superior">WWW.ELSEÑORDELOSESCANER.CL</div>
   <h1>🔧 Turnos en Espera</h1>
+
+  <button class="btn-fullscreen" onclick="activarPantallaCompleta()">🔲</button>
+
   <h3 id="totalPendientes">Autos en espera: 0</h3>
 
   <div id="actual"></div>
@@ -145,6 +163,19 @@
         `;
         siguientes.appendChild(div);
       });
+    }
+
+    function activarPantallaCompleta() {
+      const docElm = document.documentElement;
+      if (docElm.requestFullscreen) {
+        docElm.requestFullscreen();
+      } else if (docElm.mozRequestFullScreen) {
+        docElm.mozRequestFullScreen();
+      } else if (docElm.webkitRequestFullscreen) {
+        docElm.webkitRequestFullscreen();
+      } else if (docElm.msRequestFullscreen) {
+        docElm.msRequestFullscreen();
+      }
     }
 
     setInterval(actualizarVista, 3000);
