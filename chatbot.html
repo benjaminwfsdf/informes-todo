@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asistente del Taller</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1a1a1a;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .barra-superior {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      font-size: 22px;
+      font-weight: bold;
+      border-bottom: 4px solid #b30000;
+    }
+
+    .contenedor {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #333;
+      border: 2px solid #b30000;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #f33;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #ccc;
+    }
+
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #999;
+      resize: none;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      background-color: #b30000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #900;
+    }
+
+    .respuesta {
+      margin-top: 20px;
+      background-color: #222;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #666;
+      white-space: pre-wrap;
+      min-height: 100px;
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 12px;
+      padding: 10px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="barra-superior">WWW.ELSEÑORDELOSESCANER.CL</div>
+
+  <div class="contenedor">
+    <h1>🤖 Asistente IA del Taller</h1>
+    
+    <label for="pregunta">Escribe tu pregunta:</label>
+    <textarea id="pregunta" placeholder="Ej: ¿Qué significa el código P0420?"></textarea>
+    
+    <button onclick="preguntarIA()">Consultar</button>
+    
+    <div class="respuesta" id="respuesta">La respuesta aparecerá aquí...</div>
+  </div>
+
+  <div class="footer">
+    © 2025 Benjamin González. Todos los derechos reservados.
+  </div>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbzW64XBSzCYwQuzpJMHnDejQLynC66pUSh_Q1Xy8sEsGVVBgnSB1XNf-4Pr8mp1MKg/exec"; // 🔁 Reemplázala con tu URL real
+
+    function preguntarIA() {
+      const pregunta = document.getElementById("pregunta").value.trim();
+      const respuestaDiv = document.getElementById("respuesta");
+
+      if (!pregunta) {
+        alert("Por favor escribe una pregunta.");
+        return;
+      }
+
+      respuestaDiv.textContent = "⏳ Pensando...";
+
+      fetch(`${API_URL}?pregunta=${encodeURIComponent(pregunta)}`)
+        .then(res => res.text())
+        .then(texto => {
+          respuestaDiv.textContent = texto;
+        })
+        .catch(err => {
+          respuestaDiv.textContent = "❌ Error al obtener respuesta.";
+          console.error(err);
+        });
+    }
+  </script>
+</body>
+</html>
