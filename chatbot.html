@@ -110,29 +110,37 @@
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbzUOTMBb28g1JelTiIixmPnLoVq5QpDTnHDr7oFg8muV92e1I6aR8tfSK-0tFTXGAU/exec"; // 🔁 Reemplázala con tu URL real
+  const API_URL = "https://script.google.com/macros/s/AKfycbx3if7sH0yyoZaQlld22ZXbm-6RuUxEQv1Sty68UUl6hn9woHbLiv0flcqaV2c52T8/exec"; // tu API real
 
-    function preguntarIA() {
-      const pregunta = document.getElementById("pregunta").value.trim();
-      const respuestaDiv = document.getElementById("respuesta");
+  function preguntarIA() {
+    const pregunta = document.getElementById("pregunta").value.trim();
+    const respuestaDiv = document.getElementById("respuesta");
 
-      if (!pregunta) {
-        alert("Por favor escribe una pregunta.");
-        return;
-      }
-
-      respuestaDiv.textContent = "⏳ Pensando...";
-
-      fetch(`${API_URL}?pregunta=${encodeURIComponent(pregunta)}`)
-        .then(res => res.text())
-        .then(texto => {
-          respuestaDiv.textContent = texto;
-        })
-        .catch(err => {
-          respuestaDiv.textContent = "❌ Error al obtener respuesta.";
-          console.error(err);
-        });
+    if (!pregunta) {
+      alert("Por favor escribe una pregunta.");
+      return;
     }
-  </script>
+
+    respuestaDiv.textContent = "⏳ Pensando...";
+
+    fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ pregunta })
+    })
+    .then(res => res.text())
+    .then(texto => {
+      respuestaDiv.textContent = texto;
+    })
+    .catch(err => {
+      respuestaDiv.textContent = "❌ Error al obtener respuesta.";
+      console.error(err);
+    });
+  }
+</script>
+
+
 </body>
 </html>
